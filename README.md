@@ -1,2 +1,2 @@
-# SIKessEm-Encryption.py
+# Crypter
 Data encryption with Python
