@@ -13,6 +13,8 @@
 
 import string
 
+print('>>>BIENVENUE DANS NOTRE PROGRAMME DE CRYPTAGE<<<')
+print('-------------------------------------------------')
 
 word = input('Le mot à crypter : ')
 
@@ -108,3 +110,5 @@ else:
 
 
 print('Le mot crypté est :', code)
+print('-------------------------------------------------')
+input("===Tapez sur n'importe quel touche pour sortir===")
