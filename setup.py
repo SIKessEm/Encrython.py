@@ -17,7 +17,7 @@ executables = [Executable(script = "crypter.py")]
 buildOptions = dict(includes = ["string"])
 
 setup(
-    name = "Crypter",
+    name = "Encryption",
     version = "cli-1.0.0",
     description = "Data encryption",
     author = "SIGUI Kessé Emmanuel",
