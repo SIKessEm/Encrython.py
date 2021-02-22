@@ -18,7 +18,7 @@ buildOptions = dict(includes = ["string"])
 
 setup(
     name = "Encryption",
-    version = "cli-1.0.0",
+    version = "1.0.0",
     description = "Data encryption",
     author = "SIGUI Kessé Emmanuel",
     options = dict(build_exe = buildOptions),
