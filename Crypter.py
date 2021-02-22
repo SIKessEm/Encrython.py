@@ -57,8 +57,15 @@ def decrypt(word, step):
     return code
 
 
+action = ''
+while action not in ['-', '+', 'e', 'd']:
+    action = input('Encrypter (+|e) ou Décrypter (-|d) ? ')
 
+else:
 
-code = decrypt(word, step)
+    if action in ['-', 'd']:
+        code = decrypt(word, step)
+    else:
+        code = encrypt(word, step)
 
 print('Le mot crypté est :', code)
