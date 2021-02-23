@@ -14,14 +14,11 @@ import tkinter
 
 
 label_fg = "#000"
-label_h = 1
-label_w = 40
 
 entry_bg = "#fff"
-entry_w = 60
 
-button_w = 20
-button_h = 2
+button_w = 10
+button_h = 1
 
 
 window = tkinter.Tk()
@@ -56,6 +53,17 @@ step_field_entry = tkinter.Entry(
 step_field_entry.grid(row=1, column=1, padx=15, pady=10)
 
 
+encrypt_button_frame = tkinter.Frame(master=window, relief=tkinter.RAISED, bd=2, bg='blue')
+encrypt_button_frame.grid(row=2, column=0, padx=15, pady=10)
+
+encrypt_button = tkinter.Button(master=encrypt_button_frame, text='Encryt', bg="#0078ff", width=button_w, height=button_h)
+encrypt_button.pack()
+
+decrypt_button_frame = tkinter.Frame(master=window, relief=tkinter.RAISED, bd=2, bg='green')
+decrypt_button_frame.grid(row=2, column=1, padx=15, pady=10)
+
+decrypt_button = tkinter.Button(master=decrypt_button_frame, text='Decryt', bg="#00ff78", width=button_w, height=button_h)
+decrypt_button.pack()
 
 
 window.mainloop()
