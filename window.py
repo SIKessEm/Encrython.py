@@ -22,6 +22,7 @@ button_h = 1
 
 
 window = tkinter.Tk()
+window.title("Encryption")
 window.rowconfigure(0, minsize=50, weight=1)
 window.columnconfigure([0, 1], minsize=50, weight=1)
 
