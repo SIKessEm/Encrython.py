@@ -12,6 +12,8 @@
 
 import tkinter
 
+from crypter import encrypt, decrypt
+
 
 label_fg = "#000"
 
