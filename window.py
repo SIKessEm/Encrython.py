@@ -29,7 +29,7 @@ window.columnconfigure([0, 1], minsize=50, weight=1)
 
 word_field_label = tkinter.Label(
     master=window,
-    text="The secret word :",
+    text="Tip the secret word :",
     fg=label_fg
 )
 word_field_label.grid(row=0, column=0, sticky="nsew", padx=15, pady=10)
@@ -42,7 +42,7 @@ word_field_entry.grid(row=0, column=1, padx=15, pady=10)
 
 step_field_label = tkinter.Label(
     master=window,
-    text="The step number : ",
+    text="Tip the step number : ",
     fg=label_fg
 )
 step_field_label.grid(row=1, column=0, sticky="nsew", padx=15, pady=10)
