@@ -23,7 +23,7 @@ button_h = 1
 
 window = tkinter.Tk()
 window.title("Encryption")
-window.rowconfigure(0, minsize=50, weight=1)
+window.rowconfigure([0, 1, 2, 3], minsize=50, weight=1)
 window.columnconfigure([0, 1], minsize=50, weight=1)
 
 
@@ -65,6 +65,13 @@ decrypt_button_frame.grid(row=2, column=1, padx=15, pady=10)
 
 decrypt_button = tkinter.Button(master=decrypt_button_frame, text='Decryt', bg="#00ff78", width=button_w, height=button_h)
 decrypt_button.pack()
+
+
+result_label = tkinter.Label(master=window, text='The result is :')
+result_label.grid(row=3, column=0, padx=5, pady=10)
+
+result_value = tkinter.Label(master=window, bg="#ff7800", text='')
+result_value.grid(row=3, column=1, padx=5, pady=10)
 
 
 window.mainloop()
