@@ -17,10 +17,10 @@ from crypter import encrypt, decrypt
 
 label_fg = "#000"
 label_font = 'arial 18'
+label_anchor = 'w'
 
 entry_bg = "#fff"
 entry_font = 'arial 22'
-entry_place_y = 2
 
 button_w = 10
 button_h = 1
@@ -38,7 +38,8 @@ word_field_label = tkinter.Label(
     master=window,
     text="Tip the secret word :",
     fg=label_fg,
-    font=label_font
+    font=label_font,
+    anchor=label_anchor
 )
 word_field_label.grid(
     row=0,
@@ -64,7 +65,8 @@ step_field_label = tkinter.Label(
     master=window,
     text="Tip the step number : ",
     fg=label_fg,
-    font=label_font
+    font=label_font,
+    anchor=label_anchor
 )
 step_field_label.grid(
     row=1,
@@ -86,7 +88,7 @@ step_field_entry.grid(
     pady=10
 )
 
-result_label = tkinter.Label(master=window)
+result_label = tkinter.Label(master=window, font="arial 26")
 
 def encrypt_data():
     word = word_field_entry.get()
