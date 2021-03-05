@@ -11,7 +11,7 @@
 
 
 
-from tkinter import Tk
+from tkinter import Tk, Label
 
 class Window(Tk):
     """Create a new window and add a title"""
@@ -43,7 +43,21 @@ class Form:
 class Field:
     """Create a new field from master with position"""
 
+    label: Label
+    label_fg = "#000"
+    label_font = 'arial 18'
+    label_anchor = 'w'
+
     pos: int = 0
     def __init__(self, pos: int, *master):
         self.pos = pos
         self.master = master
+
+    def label(self, pos: int, text: str):
+        return self.label = Label(
+            master=self.master,
+            text=text,
+            fg=self.label_fg,
+            font=self.label_font,
+            anchor=self.label_anchor
+        )
