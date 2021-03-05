@@ -50,11 +50,13 @@ class FormField:
         self.form = form
         self.pos = pos
 
-    def label(self, text: str, pos: int = 0):
-        return FieldLabel(self, text, pos)
+    def setLabel(self, text: str, pos: int = 0):
+        self.label = FieldLabel(self, text, pos)
+        return self.label
 
-    def entry(self, pos: int = 1):
-        return FieldEntry(self, pos)
+    def setEntry(self, pos: int = 1):
+        self.entry = FieldEntry(self, pos)
+        return self.entry
 
 
 class FieldLabel(Label):
