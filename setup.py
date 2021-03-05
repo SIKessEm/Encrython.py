@@ -12,9 +12,9 @@
 
 from cx_Freeze import setup, Executable
 
-executables = [Executable(script = "crypter.py")]
+executables = [Executable(script = "window.py")]
 
-buildOptions = dict(includes = ["string"])
+buildOptions = dict(includes = ["string", "tkinter"])
 
 setup(
     name = "Encryption",
