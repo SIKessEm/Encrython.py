@@ -57,6 +57,13 @@ class FormField:
     def setEntry(self, pos: int = 1):
         self.entry = FieldEntry(self, pos)
         return self.entry
+    
+    def grid(self):
+        if hasattr(self, 'label'):
+            self.label.grid()
+
+        if hasattr(self, 'entry'):
+            self.entry.grid()
 
 
 class FieldLabel(Label):
