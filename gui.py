@@ -32,9 +32,13 @@ class Window(Tk):
 class Form:
     """Create a new form from master"""
     
-    def field(self, pos: int):
+    fields: list = []
+
+    def addField(self, pos: int):
         """Create a new field from form with pos as position"""
-        return FormField(self, pos)
+        field = FormField(self, pos)
+        self.fields.append(field)
+        return field
 
 
 class FormField:
