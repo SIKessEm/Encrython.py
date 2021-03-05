@@ -11,7 +11,7 @@
 
 
 
-from tkinter import Tk, Label
+from tkinter import Tk, Label, Entry
 
 class Window(Tk):
     """Create a new window and add a title"""
@@ -26,38 +26,68 @@ class Window(Tk):
     
     def form(self):
         """Create a new form"""
-        return Form(self)
+        return Form()
 
 
 class Form:
     """Create a new form from master"""
-
-    def __init__(self, *master):
-        self.master = master
     
     def field(self, pos: int):
         """Create a new field from form with pos as position"""
-        return Field(pos, self.master)
+        return FormField(self, pos)
 
 
-class Field:
+class FormField:
     """Create a new field from master with position"""
 
-    label: Label
-    label_fg = "#000"
-    label_font = 'arial 18'
-    label_anchor = 'w'
-
+    form: Form
     pos: int = 0
-    def __init__(self, pos: int, *master):
+    def __init__(self, form: Form, pos: int):
+        self.form = form
         self.pos = pos
-        self.master = master
 
-    def label(self, pos: int, text: str):
-        return self.label = Label(
-            master=self.master,
-            text=text,
-            fg=self.label_fg,
-            font=self.label_font,
-            anchor=self.label_anchor
-        )
+    def label(self, text: str, pos: int = 0):
+        return FieldLabel(self, text, pos)
+
+    def entry(self, pos: int = 1):
+        return FieldEntry(self, pos)
+
+
+class FieldLabel(Label):
+    """Create a new field label from master with position and text"""
+
+    field: FormField
+    pos: int = 0
+    fg: str = "#000"
+    font: str = 'arial 18'
+    anchor: str = 'w'
+    padx: int = 15
+    pady: int = 10
+    sticky="nsew"
+    
+    def __init__(self, field: FormField, text: str, pos: int = 0):
+        Label.__init__(self, text=text, fg=self.fg, font=self.font, anchor=self.anchor)
+        self.field = field
+        self.pos = pos
+
+    def grid(self):
+        return Label.grid(self, row=self.field.pos, column=self.pos, sticky=self.sticky)
+
+
+class FieldEntry(Entry):
+    """Create a new field entry from master with position and text"""
+
+    field: FormField
+    pos: int = 1
+    fg: str = "#fff"
+    font: str = 'arial 18'
+    padx: int = 15
+    pady: int = 10
+    
+    def __init__(self, field: FormField, pos: int = 1):
+        Entry.__init__(self, fg=self.fg, font=self.font)
+        self.field = field
+        self.pos = pos
+
+    def grid(self):
+        return Entry.grid(self, row=self.field.pos, column=self.pos)
