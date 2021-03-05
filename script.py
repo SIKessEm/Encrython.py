@@ -11,10 +11,11 @@
 
 
 
-from gui import Window
+from gui import Window, Form
 
 
 win = Window('Encryption')
 
+form = win.form()
 
 win.show()
