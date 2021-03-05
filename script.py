@@ -27,7 +27,7 @@ word_entry.grid()
 
 
 step_field = form.addField(1)
-step_label = step_field.setLabel('Tip the step number : ')
+step_label = step_field.setLabel('Tip the step number :')
 step_entry = step_field.setEntry()
 
 step_label.grid()
