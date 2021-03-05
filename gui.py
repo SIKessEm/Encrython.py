@@ -34,4 +34,16 @@ class Form:
 
     def __init__(self, *master):
         self.master = master
+    
+    def field(self, pos: int):
+        """Create a new field from form with pos as position"""
+        return Field(pos, self.master)
 
+
+class Field:
+    """Create a new field from master with position"""
+
+    pos: int = 0
+    def __init__(self, pos: int, *master):
+        self.pos = pos
+        self.master = master

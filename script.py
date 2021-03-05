@@ -18,4 +18,6 @@ win = Window('Encryption')
 
 form = win.form()
 
+word_field = form.field(0)
+
 win.show()
