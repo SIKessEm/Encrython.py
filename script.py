@@ -19,10 +19,18 @@ win = Window('Encryption')
 form = win.form()
 
 word_field = form.field(0)
-word_label = word_field.label("Label")
+word_label = word_field.label('Tip the secret word :')
 word_entry = word_field.entry()
 
 word_label.grid()
 word_entry.grid()
+
+
+step_field = form.field(1)
+step_label = step_field.label('Tip the step number : ')
+step_entry = step_field.entry()
+
+step_label.grid()
+step_entry.grid()
 
 win.show()
