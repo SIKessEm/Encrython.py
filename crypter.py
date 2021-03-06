@@ -30,7 +30,11 @@ def encrypt(word, step):
 
     for word_letter in word_letters:
 
-        index = 0
+        if word_letter == ' ':
+            code += word_letter
+            continue
+
+        index = None
 
         for letter in letters:
 
@@ -39,6 +43,9 @@ def encrypt(word, step):
                 index = letters.index(letter)
 
                 break
+
+        if index is None:
+            index = word_letters.index(word_letter)
 
         position = index + step
 
@@ -62,6 +69,10 @@ def decrypt(word, step):
 
     for word_letter in word_letters:
 
+        if word_letter == ' ':
+            code += word_letter
+            continue
+
         index = 0
 
         for letter in letters:
@@ -71,6 +82,9 @@ def decrypt(word, step):
                 index = letters.index(letter)
 
                 break
+
+        if index is None:
+            index = word_letters.index(word_letter)
 
         position = index - step
 
