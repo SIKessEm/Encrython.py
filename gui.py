@@ -11,7 +11,7 @@
 
 
 
-from tkinter import Tk, Frame, Label, Entry, Checkbutton, Radiobutton, Listbox
+from tkinter import *
 
 __all__ = [
     'Window',
@@ -19,14 +19,11 @@ __all__ = [
     'FormField',
     'FieldEntry',
     'FieldLabel',
-    'FormOptions',
     'FieldRadio',
     'FieldSelect',
     'FieldCheckbox',
-    'FormButton',
-    'ButtonSubmit',
-    'ButtonReset',
-    'ButtonCancel'
+    'FormBlock',
+    'FormButton'
 ]
 
 class Window(Tk):
@@ -49,16 +46,44 @@ class Window(Tk):
 class Form(Frame):
     """Create a new form from master"""
 
-    fields: list = []
+    childs: list = []
 
     def __init__(self, master=None, **kw):
         super().__init__(master, **kw)
+        self.master = master
 
-    def addField(self, pos: int):
+    def addField(self, pos: int, **kw):
         """Create a new field from form with pos as position"""
-        field = FormField(self, pos)
-        self.fields.append(field)
+        field = FormField(self.master, pos, **kw)
+        self.childs.append(field)
         return field
+    
+    def addBlock(self, **kw):
+        """Create a new block from form with pos as position"""
+        block = FormBlock(self.master, **kw)
+        self.childs.append(block)
+        return block
+
+
+class FormBlock(Frame):
+    """Create a new Block from master with position"""
+
+    form: Form
+    relief=RAISED
+    bd=2
+    padx=15
+    pady=10
+
+    def __init__(self, form: Form, **kw):
+        super().__init__(form, relief=self.relief, bd=self.bd, **kw)
+        self.form = form
+
+    def addButton(self, text: str, pos: int = 0, **kw):
+        self.button = FormButton(self, **kw)
+        return self.button
+
+    def grid(self, **kw):
+        super().grid(padx=self.padx, pady=self.pady, **kw)
 
 
 class FormField(Frame):
@@ -81,6 +106,14 @@ class FormField(Frame):
 
     def setRadio(self, pos: int = 1, **kw):
         self.input = FieldRadio(self, pos, **kw)
+        return self.input
+
+    def setSelect(self, pos: int = 1, **kw):
+        self.input = FieldSelect(self, pos, **kw)
+        return self.input
+
+    def setCheckbox(self, pos: int = 1, **kw):
+        self.input = FieldCheckbox(self, pos, **kw)
         return self.input
 
 
@@ -112,8 +145,6 @@ class FieldEntry(Entry):
     pos: int = 1
     fg: str = "#fff"
     font: str = 'arial 18'
-    padx: int = 15
-    pady: int = 10
     
     def __init__(self, field: FormField, pos: int = 1, **kw):
         super().__init__(field, fg=self.fg, font=self.font, **kw)
@@ -129,14 +160,57 @@ class FieldRadio(Radiobutton):
 
     field: FormField
     pos: int = 1
-    font: str = 'arial 18'
-    padx: int = 15
-    pady: int = 10
     
     def __init__(self, field: FormField, pos: int = 1, **kw):
-        super().__init__(field, font=self.font, **kw)
+        super().__init__(field, **kw)
         self.field = field
         self.pos = pos
 
     def grid(self, **kw):
         return super().grid(row=self.field.pos, column=self.pos, **kw)
+
+
+class FieldSelect(Listbox):
+    """Create a new field select from master with position and text"""
+
+    field: FormField
+    pos: int = 1
+    
+    def __init__(self, field: FormField, pos: int = 1, **kw):
+        super().__init__(field, **kw)
+        self.field = field
+        self.pos = pos
+
+    def grid(self, **kw):
+        return super().grid(row=self.field.pos, column=self.pos, **kw)
+
+
+class FieldCheckbox(Checkbutton):
+    """Create a new field check from master with position and text"""
+
+    field: FormField
+    pos: int = 1
+    
+    def __init__(self, field: FormField, pos: int = 1, **kw):
+        super().__init__(field, **kw)
+        self.field = field
+        self.pos = pos
+
+    def grid(self, **kw):
+        return super().grid(row=self.field.pos, column=self.pos, **kw)
+
+
+class FormButton(Button):
+    """Create a new block button from master with position and text"""
+
+    block: FormBlock
+    width = 10
+    height = 1
+    font ='Arial 16'
+    
+    def __init__(self, block: FormBlock, **kw):
+        super().__init__(master=block, width=self.width, height=self.height, font=self.font, **kw)
+        self.block = block
+
+    def pack(self, **kw):
+        return super().pack(**kw)

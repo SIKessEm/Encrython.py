@@ -14,9 +14,11 @@
 from gui import Window, Form
 
 
-win = Window('Encryption')
+window = Window('Encryption')
 
-form = win.addForm()
+form = window.addForm()
+form.rowconfigure([0, 1, 2, 3], minsize=50, weight=1)
+form.columnconfigure([0, 1], minsize=50, weight=1)
 
 word_field = form.addField(0)
 word_label = word_field.setLabel('Tip the secret word :')
@@ -33,13 +35,19 @@ step_label.grid()
 step_entry.grid()
 step_field.pack()
 
-test_field = form.addField(1)
-test_label = test_field.setLabel('Tip the test number :')
-test_entry = test_field.setRadio()
-test_label.grid()
-test_entry.grid()
-test_field.pack()
+
+encrypt_block = form.addBlock()
+encrypt_block.grid(row=2, column=0)
+encrypt_button = encrypt_block.addButton('Encrypt')
+encrypt_button.pack()
+
+
+decrypt_block = form.addBlock()
+decrypt_block.grid(row=2, column=1)
+decrypt_button = decrypt_block.addButton('Decrypt')
+decrypt_button.pack()
+
 
 form.pack()
 
-win.loop()
+window.loop()
