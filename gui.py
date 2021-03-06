@@ -11,28 +11,48 @@
 
 
 
-from tkinter import Tk, Label, Entry
+from tkinter import Tk, Frame, Label, Entry
+
+__all__ = [
+    'Window',
+    'Form',
+    'FormField',
+    'FieldEntry',
+    'FieldLabel',
+    'FormOptions',
+    'FormCheckbox',
+    'FormRadio',
+    'FormSelect',
+    'FormButton',
+    'ButtonSubmit',
+    'ButtonReset',
+    'ButtonCancel'
+]
 
 class Window(Tk):
     """Create a new window and add a title"""
 
-    def __init__(self, title):
-        Tk.__init__(self)
+    def __init__(self, title, **kw):
+        super().__init__(**kw)
         self.title(title)
 
-    def show(self):
-        """Build and show the window"""
+    def loop(self):
+        """Launch the window"""
         return self.mainloop()
     
-    def form(self):
+    def addForm(self, **kw):
         """Create a new form"""
-        return Form()
+        form = Form(self, **kw)
+        return form
 
 
-class Form:
+class Form(Frame):
     """Create a new form from master"""
-    
+
     fields: list = []
+
+    def __init__(self, master=None, **kw):
+        super().__init__(master, **kw)
 
     def addField(self, pos: int):
         """Create a new field from form with pos as position"""
@@ -41,12 +61,13 @@ class Form:
         return field
 
 
-class FormField:
+class FormField(Frame):
     """Create a new field from master with position"""
 
     form: Form
     pos: int = 0
-    def __init__(self, form: Form, pos: int):
+    def __init__(self, form: Form, pos: int, **kw):
+        super().__init__(form, **kw)
         self.form = form
         self.pos = pos
 
@@ -57,13 +78,6 @@ class FormField:
     def setEntry(self, pos: int = 1):
         self.entry = FieldEntry(self, pos)
         return self.entry
-    
-    def grid(self):
-        if hasattr(self, 'label'):
-            self.label.grid()
-
-        if hasattr(self, 'entry'):
-            self.entry.grid()
 
 
 class FieldLabel(Label):
@@ -78,13 +92,13 @@ class FieldLabel(Label):
     pady: int = 10
     sticky="nsew"
     
-    def __init__(self, field: FormField, text: str, pos: int = 0):
-        Label.__init__(self, text=text, fg=self.fg, font=self.font, anchor=self.anchor)
+    def __init__(self, field: FormField, text: str, pos: int = 0, **kw):
+        super().__init__(field, text=text, fg=self.fg, font=self.font, anchor=self.anchor, **kw)
         self.field = field
         self.pos = pos
 
-    def grid(self):
-        return Label.grid(self, row=self.field.pos, column=self.pos, sticky=self.sticky)
+    def grid(self, **kw):
+        return super().grid(row=self.field.pos, column=self.pos, sticky=self.sticky, **kw)
 
 
 class FieldEntry(Entry):
@@ -97,10 +111,10 @@ class FieldEntry(Entry):
     padx: int = 15
     pady: int = 10
     
-    def __init__(self, field: FormField, pos: int = 1):
-        Entry.__init__(self, fg=self.fg, font=self.font)
+    def __init__(self, field: FormField, pos: int = 1, **kw):
+        super().__init__(field, fg=self.fg, font=self.font, **kw)
         self.field = field
         self.pos = pos
 
-    def grid(self):
-        return Entry.grid(self, row=self.field.pos, column=self.pos)
+    def grid(self, **kw):
+        return super().grid(row=self.field.pos, column=self.pos, **kw)
