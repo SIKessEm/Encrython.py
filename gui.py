@@ -11,7 +11,7 @@
 
 
 
-from tkinter import Tk, Frame, Label, Entry
+from tkinter import Tk, Frame, Label, Entry, Checkbutton, Radiobutton, Listbox
 
 __all__ = [
     'Window',
@@ -20,9 +20,9 @@ __all__ = [
     'FieldEntry',
     'FieldLabel',
     'FormOptions',
-    'FormCheckbox',
-    'FormRadio',
-    'FormSelect',
+    'FieldRadio',
+    'FieldSelect',
+    'FieldCheckbox',
     'FormButton',
     'ButtonSubmit',
     'ButtonReset',
@@ -71,13 +71,17 @@ class FormField(Frame):
         self.form = form
         self.pos = pos
 
-    def setLabel(self, text: str, pos: int = 0):
-        self.label = FieldLabel(self, text, pos)
+    def setLabel(self, text: str, pos: int = 0, **kw):
+        self.label = FieldLabel(self, text, pos, **kw)
         return self.label
 
-    def setEntry(self, pos: int = 1):
-        self.entry = FieldEntry(self, pos)
-        return self.entry
+    def setEntry(self, pos: int = 1, **kw):
+        self.input = FieldEntry(self, pos, **kw)
+        return self.input
+
+    def setRadio(self, pos: int = 1, **kw):
+        self.input = FieldRadio(self, pos, **kw)
+        return self.input
 
 
 class FieldLabel(Label):
@@ -113,6 +117,24 @@ class FieldEntry(Entry):
     
     def __init__(self, field: FormField, pos: int = 1, **kw):
         super().__init__(field, fg=self.fg, font=self.font, **kw)
+        self.field = field
+        self.pos = pos
+
+    def grid(self, **kw):
+        return super().grid(row=self.field.pos, column=self.pos, **kw)
+
+
+class FieldRadio(Radiobutton):
+    """Create a new field radio from master with position and text"""
+
+    field: FormField
+    pos: int = 1
+    font: str = 'arial 18'
+    padx: int = 15
+    pady: int = 10
+    
+    def __init__(self, field: FormField, pos: int = 1, **kw):
+        super().__init__(field, font=self.font, **kw)
         self.field = field
         self.pos = pos
 

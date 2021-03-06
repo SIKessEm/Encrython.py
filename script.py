@@ -33,6 +33,13 @@ step_label.grid()
 step_entry.grid()
 step_field.pack()
 
+test_field = form.addField(1)
+test_label = test_field.setLabel('Tip the test number :')
+test_entry = test_field.setRadio()
+test_label.grid()
+test_entry.grid()
+test_field.pack()
+
 form.pack()
 
 win.loop()
