@@ -25,21 +25,9 @@ step = int(step)
 action = ''
 
 while action not in ['-', '+', 'e', 'd']:
-
     action = input('Encrypter (+|e) ou Décrypter (-|d) ? ')
 
-else:
-
-    if action in ['-', 'd']:
-
-        code = decrypt(word, step)
-
-    else:
-
-        code = encrypt(word, step)
-
-
-
+code = decrypt(word, step) if action in ['-', 'd'] else encrypt(word, step)
 print('Le mot crypté est :', code)
 print('-------------------------------------------------')
 input("===Tapez sur n'importe quel touche pour sortir===")
