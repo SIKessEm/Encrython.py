@@ -39,8 +39,7 @@ class Window(Tk):
     
     def addForm(self, **kw):
         """Create a new form"""
-        form = Form(self, **kw)
-        return form
+        return Form(self, **kw)
 
 
 class Form(Frame):
